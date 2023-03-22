@@ -6,10 +6,11 @@ import sys
 class CarpriceException(Exception):
     
 
-    def __init__(self, error_message:Exception, error_detail:sys):
+    def __init__(self, error_message: Exception, error_detail:sys):
         super().__init__(error_message)
         self.error_message = CarpriceException.error_message_detail(error_message, error_detail=error_detail)
 
+    @staticmethod
     def error_message_detail(error:Exception, error_detail:sys)->str:
         """
         error: Exception object raise from module
