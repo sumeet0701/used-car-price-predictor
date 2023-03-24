@@ -8,14 +8,14 @@ from carprice import utils
 from carprice.logger import logging
 from sklearn.model_selection import train_test_split
 
-class Datainjestion:
-    def __init__(self, data_injestion_config = config_entity.DataInjestionConfig):
+class Dataingestion:
+    def __init__(self, data_injestion_config = config_entity.DataIngestionConfig):
         try:
             self.data_injestion_config = data_injestion_config
         except Exception as e:
             raise CarpriceException(e, sys)
         
-    def initiate_data_injestion(self)->artifact_entity.DataInjestinArtifact:
+    def initiate_data_injestion(self)->artifact_entity.DataIngestionArtifact:
         try:
             logging.info(f"Export collection data as dataframe")
             df:pd.DataFrame = utils.get_collection_as_dataframe(
@@ -44,7 +44,7 @@ class Datainjestion:
             test_df.to_csv(path_or_buf=self.data_injestion_config.test_file_path,index=False, header=True)
 
             #prepare artifact folder
-            data_injestion_artifact = artifact_entity.DataInjestinArtifact(
+            data_injestion_artifact = artifact_entity.DataIngestionArtifact(
                 feature_store_file_path = self.data_injestion_config.feature_store_file_path,
                 train_file_path = self.data_injestion_config.train_file_path,
                 test_file_path = self.data_injestion_config.test_file_path

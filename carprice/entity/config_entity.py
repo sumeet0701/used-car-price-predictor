@@ -14,7 +14,7 @@ class TrainigPipelineConfig:
             raise CarpriceException(e, sys)
         
 
-class DataInjestionConfig:
+class DataIngestionConfig:
     def __init__(self,training_pipeline_config: TrainigPipelineConfig):
         try:
             self.database_name = "Cars"
@@ -33,4 +33,8 @@ class DataInjestionConfig:
             raise CarpriceException(e, sys)
 
 class DataValidationConfig:
-    pass
+    def __init__(self, training_pipeline_config:TrainigPipelineConfig):
+        self.data_validation_dir = os.path.join(training_pipeline_config.artifact_dir,"data_validation")
+        self.report_file_path = os.path.join(self.data_validation_dir,"report.yaml")
+        self.missing_threshold:float = 0.2
+        self.base_file_path = os.path.join("Car_details.csv")
